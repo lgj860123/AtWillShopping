@@ -8,4 +8,16 @@ import android.app.Application;
  */
 
 public class App extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        init();
+    }
+
+    /**
+     * 初始化各种第三方
+     */
+    private void init() {
+
+    }
 }
