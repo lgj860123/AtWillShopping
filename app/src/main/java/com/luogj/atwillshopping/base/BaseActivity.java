@@ -5,9 +5,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
  * 所有activity的父类
@@ -23,24 +26,23 @@ public class BaseActivity extends Activity {
     }
 
     private void init() {
-        setTranslucentStatus(false);
+        setTranslucentStatus(true);
     }
 
-//    /**
-//     * 设置状态栏
-//     * @param colorResId
-//     */
-//    protected void setStatusBarColor(int colorResId) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT &&
-//                Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            SystemBarTintManager tintManager = new SystemBarTintManager( this );
-//            tintManager.setStatusBarTintEnabled(true);
-//            tintManager.setNavigationBarTintEnabled(true);
-//            tintManager.setStatusBarTintResource( colorResId );
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            getWindow().setStatusBarColor( ContextCompat.getColor(mActivity, colorResId));
-//        }
-//    }
+    /**
+     * 设置状态栏
+     * @param colorResId
+     */
+    protected void setStatusBarColor(int colorResId) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            SystemBarTintManager tintManager = new SystemBarTintManager( this );
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setStatusBarTintResource( colorResId );
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, colorResId));
+        }
+    }
 
     /**
      * 设置状态栏是否透明
